@@ -1,0 +1,71 @@
+﻿@page "/company"
+@page "/company/{id:int}"
+
+@if (Id == 0)
+{
+    <PageTitle></PageTitle>
+    <h3>Create Company</h3>
+}
+else
+{
+    <PageTitle>Edit @companyDto.CompanyName</PageTitle>
+    <h3>Edit  @companyDto.CompanyName</h3>
+}
+<br />
+<EditForm Model="companyDto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <div class="row">
+        <div class="col-6">
+            <div>
+                <label for="parentCompanyId">Parent Comapny Id</label>
+                <InputNumber id="parentCompanyId" @bind-Value="companyDto.ParentComapnyId" class="form-control"></InputNumber>
+                <ValidationMessage For="(() => companyDto.ParentComapnyId)"></ValidationMessage>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <label for="companyName">Company Name</label>
+                <InputText id="companyName" @bind-Value="companyDto.CompanyName" class="form-control"></InputText>
+                <ValidationMessage For="(() => companyDto.CompanyName)"></ValidationMessage>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <br />
+                <label for="portalAccess">
+                    Portal Access:
+                    &nbsp &nbsp<InputCheckbox id="portalAccess" @bind-Value="companyDto.PortalAccess" />
+                </label>
+                <ValidationMessage For="(() => companyDto.PortalAccess)"></ValidationMessage>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <br />
+                <label for="isActive">
+                    Active:
+                    &nbsp &nbsp<InputCheckbox id="isActive" @bind-Value="companyDto.IsActive" />
+                </label>
+                <ValidationMessage For="(() => companyDto.IsActive)"></ValidationMessage>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div>
+                <label for="lastDateModified">Last Date Modified</label>
+                <InputDate id="lastDateModified" @bind-Value="companyDto.LastDateModified" class="form-control"></InputDate>
+                <ValidationMessage For="(() => companyDto.LastDateModified)"></ValidationMessage>
+            </div>
+        </div>
+
+    </div>
+    <br />
+    <button class="btn btn-primary" type="submit">@btnText</button>
+
+</EditForm>
+
+@code {
+
+}

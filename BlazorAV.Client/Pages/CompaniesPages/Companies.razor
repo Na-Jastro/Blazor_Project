@@ -1,0 +1,50 @@
+﻿@page "/companies"
+
+<h1>Companies</h1>
+
+<button class="btn btn-primary" @onclick="CreateNewCompany">Create New Company</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Company Id</th>
+            <th scope="col">Parent Comapny Id</th>
+            <th scope="col">Portal Access</th>
+            <th scope="col">Is Active</th>
+            <th scope="col">Updated System User Id</th>
+            <th scope="col">Last Date Modified</th>
+            <th scope="col">Deleted</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comp in CompanyService.Companies)
+        {
+            <tr>
+                <td>@comp.CompanyId</td>
+                <td>@comp.ParentComapnyId</td>
+                <td>@comp.PortalAccess</td>
+                <td>@comp.IsActive</td>
+                <td>@comp.UpdatedSystemUserId</td>
+                <td>@comp.LastDateModified</td>
+                <td>@comp.Deleted</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="(() => EditCompany(comp.CompanyId))">
+                        <i class="oi oi-pencil"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" @onclick="(() => DeleteCompany(comp.CompanyId))">
+                        <i class="oi oi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@code {
+
+}

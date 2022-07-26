@@ -1,0 +1,111 @@
+﻿@page "/designation"
+@page "/designation/{id:int}"
+
+@if (Id == 0)
+{
+    <PageTitle></PageTitle>
+    <h3>Create new Designation</h3>
+}
+else
+{
+    <PageTitle>Update @designationDto.CompanyName</PageTitle>
+    <h3>Update @designationDto.CompanyName</h3>
+}
+<br />
+<EditForm Model="designationDto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <div class="row">
+
+        <div class="col-6">
+            <div>
+                <label for="designationId">Designation Id</label>
+                <InputNumber id="designationId" @bind-Value="designationDto.DesignationId" class="form-control"></InputNumber>
+                <ValidationMessage For="(() => designationDto.DesignationId)"></ValidationMessage>
+            </div>
+        </div>
+
+        @*company DropDown*@
+        <div class="col-6">
+            <div>
+                <label for="companyId">Company Id</label>
+                <InputSelect id="companyId" @bind-Value="designationDto.CompanyId" class="form-control">
+                    @foreach (var company in CompanyService.Companies)
+                    {
+                        <option value="@company.CompanyId">@company.CompanyName</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="(() => designationDto.CompanyId)"></ValidationMessage>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div>
+                <label for="companyName">Company Name</label>
+                <InputText id="companyName" @bind-Value="designationDto.CompanyName" class="form-control"></InputText>
+                <ValidationMessage For="(() => designationDto.CompanyName)"></ValidationMessage>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div>
+                <label for="designationDescription">Designation Description</label>
+                <InputText id="designationDescription" @bind-Value="designationDto.DesignationDescription" class="form-control"></InputText>
+                <ValidationMessage For="(() => designationDto.DesignationDescription)"></ValidationMessage>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div>
+                <label for="updatedSystemUserId">Updated System User Id</label>
+                <InputNumber id="updatedSystemUSerId" @bind-Value="designationDto.UpdatedSystemUserId" class="form-control"></InputNumber>
+                <ValidationMessage For="(() => designationDto.UpdatedSystemUserId)"></ValidationMessage>
+            </div>
+        </div>
+        <div class="col-6">
+            <label for="lastDateModified">Last Date Modified</label>
+            <InputDate id="lastDateModified" @bind-Value="designationDto.LastDateModified" class="form-control"></InputDate>
+            <ValidationMessage For="(() => designationDto.LastDateModified)"></ValidationMessage>
+        </div>
+        <br />
+        <div class="col-6">
+            <div>
+                <label for="deleted">Deleted</label>
+                Deleted: &nbsp &nbsp
+                <InputCheckbox id="deleted" @bind-Value="designationDto.Deleted"></InputCheckbox>
+                <ValidationMessage For="(() => designationDto.Deleted)"></ValidationMessage>
+            </div>
+        </div>
+
+
+        <div class="col-6">
+            <div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="col-6">
+            <div>
+                <button type="submit" class="btn btn-primary">@btnText</button>
+
+            </div>
+        </div>
+
+        @if (Id != 0)
+        {
+            <div class="col-6">
+                <div>
+                    <button @onclick="(() => DeleteDesignationAsync(Id))" class="btn btn-danger">Delete Designation</button>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</EditForm>
+
+@code {
+
+}
+

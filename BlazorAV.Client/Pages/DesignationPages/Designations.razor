@@ -1,0 +1,50 @@
+﻿@page "/designations"
+
+<h3>Designations</h3>
+
+<button class="btn btn-primary" @onclick="CreateDesignation">Create New Designation</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Designation Id</th>
+            <th scope="col">Company Id</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Designation Description</th>
+            <th scope="col">Updated System User Id</th>
+            <th scope="col">Last Date Modified</th>
+            <th scope="col">Deleted</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var designation in DesignationService.Designations)
+        {
+            <tr>
+                <td>@designation.DesignationId</td>
+                <td>@designation.CompanyId</td>
+                <td>@designation.CompanyName</td>
+                <td>@designation.DesignationDescription</td>
+                <td>@designation.UpdatedSystemUserId</td>
+                <td>@designation.LastDateModified</td>
+                <td>@designation.Deleted</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="(() => UpdateDesignation(designation.DesignationId))">
+                        <i class="oi oi-pencil"></i>
+                    </button>
+                </td>
+               @* <td>
+                    <button class="btn btn-danger" @onclick="(() => DeleteDesignation(designation.DesignationId))">
+                        <i class="oi oi-trash"></i>
+                    </button>
+                </td>*@
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@code {
+
+}
